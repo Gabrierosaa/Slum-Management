@@ -11,7 +11,14 @@ public class Favela {
     private int mercadoriaTotal;
 
     //entidades da favela
-    private List<Integrante> integrantes = new ArrayList<>();
+    private final List<Integrante> integrantes = new ArrayList<>(); 
+
+// O método que resolve o erro de 'adicionarIntegrante is undefined'
+    public void adicionarIntegrante(Integrante novoIntegrante) { 
+        if (novoIntegrante != null) {
+        this.integrantes.add(novoIntegrante);  
+    }
+}
 
     //Construtor
     public Favela(String nomeJogador, String nomeFavela) {
@@ -67,6 +74,28 @@ public class Favela {
         this.saldoDinheiro += valorRecebido;
      
         return true;
+    }
+
+    // Método para aplicar bônus de venda (usado pelos Vendedores)
+    public void aplicarBonusVenda(double bonus) {
+        // Pode ser implementado de diferentes formas, por exemplo:
+        // - Aumentar temporariamente a taxa de venda
+        // - Adicionar dinheiro diretamente baseado no bônus
+        this.saldoDinheiro += bonus;
+    }
+
+    // Método para gastar dinheiro (usado para compras e upgrades)
+    public boolean gastarDinheiro(double valor) {
+        if (valor <= 0 || valor > this.saldoDinheiro) {
+            return false; // Não pode gastar valor inválido ou maior que o saldo
+        }
+        this.saldoDinheiro -= valor;
+        return true;
+    }
+
+    // Método para obter a taxa de venda atual de mercadoria
+    public double getTaxaVendaMercadoria() {
+        return 1.5; // Taxa fixa de venda
     }
 }
 
