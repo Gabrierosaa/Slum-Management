@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d5cf32f4-7745-4533-9848-c60be548b286" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/bin/com/slummanagement/controle/AcaoListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/slummanagement/controle/AcaoListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/slummanagement/controle/DadosObserver.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/slummanagement/controle/DadosObserver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/slummanagement/controle/JogoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/slummanagement/controle/JogoController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/slummanagement/modelo/Influencer.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/slummanagement/modelo/Influencer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/slummanagement/modelo/Integrante.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/slummanagement/modelo/Integrante.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/slummanagement/modelo/Melhoria.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/slummanagement/modelo/Melhoria.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/slummanagement/modelo/Simulador.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/slummanagement/modelo/Simulador.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="34bse4vjng9g9nEAyjzINCEOJ7T" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "gabriel__updates",
+    "last_opened_file_path": "C:/Users/Gabriel/Desktop/Repositorios/Slum-Management"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d5cf32f4-7745-4533-9848-c60be548b286" name="Changes" comment="" />
+      <created>1761493699728</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1761493699728</updated>
+    </task>
+    <servers />
+  </component>
+</project>
