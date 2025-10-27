@@ -17,9 +17,9 @@ public class PersonalizacaoPanel extends JPanel {
         // Tenta carregar a imagem de fundo
         try {
             // Verifica se o arquivo existe. Isso é importante para depuração!
-            File imagemFile = new File("/res/imagens/favela.jpg");
+            File imagemFile = new File(CAMINHO_IMAGEM_FUNDO);
             if (!imagemFile.exists()) {
-                System.err.println("ERRO: Imagem de fundo não encontrada em: " + CAMINHO_IMAGEM_FUNDO);
+                System.err.println("ERRO: Imagem de fundo não encontrada em: " + imagemFile.getAbsolutePath());
             }
             // Usa ImageIcon para carregar a imagem e depois obter a Image
             imagemFundo = new ImageIcon(CAMINHO_IMAGEM_FUNDO).getImage();
@@ -35,7 +35,7 @@ public class PersonalizacaoPanel extends JPanel {
         // 1. Título do Jogo (Arial)
         JLabel tituloJogo = new JLabel("SLUM MANAGEMENT");
         tituloJogo.setFont(new Font("Arial", Font.BOLD, 48)); // Fonte Arial, negrito, tamanho 48
-        tituloJogo.setForeground(Color.WHITE); // Cor do texto
+        tituloJogo.setForeground(Color.BLACK); // Cor do texto
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2; // Ocupa duas colunas
@@ -45,7 +45,7 @@ public class PersonalizacaoPanel extends JPanel {
         // 2. Campo Nome do Jogador
         JLabel labelNomeJogador = new JLabel("Nome do Jogador:");
         labelNomeJogador.setFont(new Font("Arial", Font.PLAIN, 18));
-        labelNomeJogador.setForeground(Color.WHITE);
+        labelNomeJogador.setForeground(Color.BLACK);
         gbc.gridy = 1;
         gbc.gridwidth = 1;
         gbc.anchor = GridBagConstraints.EAST; // Alinha à direita
@@ -61,7 +61,7 @@ public class PersonalizacaoPanel extends JPanel {
         // 3. Campo Nome da Favela
         JLabel labelNomeFavela = new JLabel("Nome da Favela:");
         labelNomeFavela.setFont(new Font("Arial", Font.PLAIN, 18));
-        labelNomeFavela.setForeground(Color.WHITE);
+        labelNomeFavela.setForeground(Color.BLACK);
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.EAST;

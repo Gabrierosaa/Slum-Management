@@ -15,10 +15,9 @@ public class App {
             // Adiciona o painel de personalização à janela principal
             frame.setConteudoPanel(personalizacaoPanel);
             
-            // Agora, você precisaria de um Controlador (JogoController) para
-            // adicionar a lógica ao botão "Jogar" e interagir com o Modelo.
-            // Ex: JogoController controller = new JogoController(frame, personalizacaoPanel, ...);
-            // controller.inicializar();
+            // Cria e inicializa o controlador para ativar o botão Jogar
+            com.slummanagement.controle.JogoController controller = new com.slummanagement.controle.JogoController(frame, personalizacaoPanel);
+            controller.inicializar();
         });
     }
 }
