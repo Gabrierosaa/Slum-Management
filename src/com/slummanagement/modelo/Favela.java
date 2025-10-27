@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Favela {
     //atributos da classe
-    private String nomeJogador;
-    private String nomeFavela;
+    private final String nomeJogador;
+    private final String nomeFavela;
     private double saldoDinheiro;
     private int mercadoriaTotal;
 
