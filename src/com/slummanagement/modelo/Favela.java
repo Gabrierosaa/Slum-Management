@@ -24,7 +24,7 @@ public class Favela {
     public Favela(String nomeJogador, String nomeFavela) {
         this.nomeJogador = nomeJogador;
         this.nomeFavela = nomeFavela;
-        this.saldoDinheiro = 1000.0; //saldo inicial
+        this.saldoDinheiro = 500.0; //saldo inicial
         this.mercadoriaTotal = 0; //mercadoria inicial
     }
 
