@@ -1,7 +1,9 @@
 package com.slummanagement.visao;
 
-import javax.swing.JFrame;
+import com.slummanagement.controle.JogoController;
+import com.slummanagement.modelo.Simulador;
 import java.awt.Dimension;
+import javax.swing.JFrame;
 
 public class PrincipalFrame extends JFrame{
 
@@ -12,6 +14,15 @@ public class PrincipalFrame extends JFrame{
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
+
+        PersonalizacaoPanel personalizacaoPanel = new PersonalizacaoPanel();
+        Simulador simulador = new Simulador();
+
+        JogoController controller = new JogoController(this, personalizacaoPanel, simulador);
+        controller.inicializar();
+
+        setContentPane(personalizacaoPanel);
+    
     }
 
     public void setConteudoPanel(javax.swing.JPanel panel) {

@@ -1,14 +1,14 @@
 package com.slummanagement.visao;
 
-import javax.swing.*;
 import java.awt.*;
-import java.io.File; // Para verificar se o arquivo existe
+import java.io.File;
+import javax.swing.*; // Para verificar se o arquivo existe
 
 public class PersonalizacaoPanel extends JPanel {
 
     private final String CAMINHO_IMAGEM_FUNDO = "res/imagens/favela.jpg"; 
     private Image imagemFundo;
-
+    private JLabel labelMensagem;
     private JTextField campoNomeJogador;
     private JTextField campoNomeFavela;
     private JButton botaoJogar;
@@ -96,7 +96,7 @@ public class PersonalizacaoPanel extends JPanel {
             g.drawImage(imagemFundo, 0, 0, getWidth(), getHeight(), this);
         } else {
             // Se a imagem não carregou, desenha um fundo escuro
-            g.setColor(Color.DARK_GRAY);
+            g.setColor(Color.ORANGE);
             g.fillRect(0, 0, getWidth(), getHeight());
         }
     }
@@ -105,4 +105,9 @@ public class PersonalizacaoPanel extends JPanel {
     public JTextField getCampoNomeJogador() { return campoNomeJogador; }
     public JTextField getCampoNomeFavela() { return campoNomeFavela; }
     public JButton getBotaoJogar() { return botaoJogar; }
+
+    public PersonalizacaoPanel(String mensagem) {
+        labelMensagem = new JLabel(mensagem);
+        add(labelMensagem);
+    }
 }

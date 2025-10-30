@@ -1,0 +1,7 @@
+# Ignorar arquivos compilados Java
+*.class
+
+# Ignorar diretórios de build
+/bin/
+/out/
+/target/
