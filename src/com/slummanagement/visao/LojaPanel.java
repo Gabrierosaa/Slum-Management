@@ -22,8 +22,8 @@ public class LojaPanel extends JPanel {
     private JButton btnMelhoriaNivel2;
     private JButton btnMelhoriaNivel3;
     
-    // Botão para comprar mercadorias
-    private JButton btnComprarMercadorias;
+    // Botão para vender mercadorias
+    private JButton btnVenderMercadorias;
     
     // Botão voltar
     private JButton btnVoltar;
@@ -58,8 +58,15 @@ public class LojaPanel extends JPanel {
         btnMelhoriaNivel3 = criarBotaoItem("Melhoria Nível 3", "Grande melhoria na favela", 
                 Melhoria.NivelUpgrade.NIVEL3.getMelhoriaPreco());
         
-        // Botão para comprar mercadorias
-        btnComprarMercadorias = criarBotaoItem("Comprar Mercadorias (x10)", "Adiciona 10 mercadorias ao estoque", 20.0);
+    // Botão para vender mercadorias
+    btnVenderMercadorias = new JButton();
+    btnVenderMercadorias.setText("Vender Mercadorias");
+    btnVenderMercadorias.setFont(new Font("Arial", Font.BOLD, 14));
+    btnVenderMercadorias.setBackground(new Color(70, 130, 180));
+    btnVenderMercadorias.setForeground(Color.WHITE);
+    btnVenderMercadorias.setBorderPainted(false);
+    btnVenderMercadorias.setFocusPainted(false);
+    btnVenderMercadorias.setPreferredSize(new Dimension(250, 80));
         
         // Botão voltar
         btnVoltar = new JButton("← Voltar");
@@ -112,7 +119,7 @@ public class LojaPanel extends JPanel {
         painelInfo.setBackground(new Color(35, 35, 35));
         painelInfo.setBorder(new EmptyBorder(15, 20, 15, 20));
         
-        JLabel titulo = new JLabel("🏪 LOJA DA FAVELA");
+        JLabel titulo = new JLabel(" LOJA");
         titulo.setFont(new Font("Arial", Font.BOLD, 24));
         titulo.setForeground(Color.WHITE);
         
@@ -128,41 +135,38 @@ public class LojaPanel extends JPanel {
         painelInfo.add(Box.createHorizontalStrut(30));
         painelInfo.add(labelMercadorias);
         
-        // Painel central com itens da loja
-        JPanel painelCentral = new JPanel(new GridLayout(2, 1, 10, 10));
-        painelCentral.setBackground(new Color(45, 45, 45));
-        painelCentral.setBorder(new EmptyBorder(20, 20, 20, 20));
+    // Painel central com seções lado a lado
+    JPanel painelCentral = new JPanel(new GridLayout(1, 2, 20, 0));
+    painelCentral.setBackground(new Color(45, 45, 45));
+    painelCentral.setBorder(new EmptyBorder(20, 20, 0, 20));
+
+    // Seção de integrantes
+    JPanel secaoIntegrantes = criarSecao("CONTRATAR INTEGRANTES", 
+        new JButton[]{btnComprarFabricante, btnComprarVendedor, btnComprarSeguranca});
+
+    // Seção de melhorias
+    JPanel secaoMelhorias = criarSecao("MELHORIAS", 
+        new JButton[]{btnMelhoriaNivel1, btnMelhoriaNivel2, btnMelhoriaNivel3});
+
+    painelCentral.add(secaoIntegrantes);
+    painelCentral.add(secaoMelhorias);
         
-        // Seção de integrantes
-        JPanel secaoIntegrantes = criarSecao("👥 CONTRATAR INTEGRANTES", 
-                new JButton[]{btnComprarFabricante, btnComprarVendedor, btnComprarSeguranca});
-        
-        // Painel para melhorias e mercadorias
-        JPanel painelMelhoriasMercadorias = new JPanel(new GridLayout(1, 2, 10, 0));
-        painelMelhoriasMercadorias.setOpaque(false);
-        
-        JPanel secaoMelhorias = criarSecao("🏗️ MELHORIAS", 
-                new JButton[]{btnMelhoriaNivel1, btnMelhoriaNivel2, btnMelhoriaNivel3});
-        
-        JPanel secaoMercadorias = criarSecao("📦 MERCADORIAS", 
-                new JButton[]{btnComprarMercadorias});
-        
-        painelMelhoriasMercadorias.add(secaoMelhorias);
-        painelMelhoriasMercadorias.add(secaoMercadorias);
-        
-        painelCentral.add(secaoIntegrantes);
-        painelCentral.add(painelMelhoriasMercadorias);
-        
-        // Painel inferior com botão voltar
-        JPanel painelInferior = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        painelInferior.setBackground(new Color(45, 45, 45));
-        painelInferior.setBorder(new EmptyBorder(10, 20, 20, 20));
-        painelInferior.add(btnVoltar);
-        
-        // Adicionar ao painel principal
-        add(painelInfo, BorderLayout.NORTH);
-        add(painelCentral, BorderLayout.CENTER);
-        add(painelInferior, BorderLayout.SOUTH);
+    // Painel inferior com botão de vender mercadorias centralizado e botão voltar à esquerda
+    JPanel painelInferior = new JPanel(new BorderLayout());
+    painelInferior.setBackground(new Color(45, 45, 45));
+    painelInferior.setBorder(new EmptyBorder(10, 20, 20, 20));
+
+    JPanel painelBotoesInferior = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+    painelBotoesInferior.setBackground(new Color(45, 45, 45));
+    painelBotoesInferior.add(btnVenderMercadorias);
+
+    painelInferior.add(btnVoltar, BorderLayout.WEST);
+    painelInferior.add(painelBotoesInferior, BorderLayout.CENTER);
+
+    // Adicionar ao painel principal
+    add(painelInfo, BorderLayout.NORTH);
+    add(painelCentral, BorderLayout.CENTER);
+    add(painelInferior, BorderLayout.SOUTH);
     }
     
     private JPanel criarSecao(String titulo, JButton[] botoes) {
@@ -188,17 +192,17 @@ public class LojaPanel extends JPanel {
     }
     
     private void setupEventListeners() {
-        btnComprarFabricante.addActionListener(e -> comprarIntegrante("Fabricante", 100.0));
-        btnComprarVendedor.addActionListener(e -> comprarIntegrante("Vendedor", 150.0));
-        btnComprarSeguranca.addActionListener(e -> comprarIntegrante("Seguranca", 200.0));
+    btnComprarFabricante.addActionListener(e -> comprarIntegrante("Fabricante", 100.0));
+    btnComprarVendedor.addActionListener(e -> comprarIntegrante("Vendedor", 150.0));
+    btnComprarSeguranca.addActionListener(e -> comprarIntegrante("Seguranca", 200.0));
         
-        btnMelhoriaNivel1.addActionListener(e -> comprarMelhoria(Melhoria.NivelUpgrade.NIVEL1));
-        btnMelhoriaNivel2.addActionListener(e -> comprarMelhoria(Melhoria.NivelUpgrade.NIVEL2));
-        btnMelhoriaNivel3.addActionListener(e -> comprarMelhoria(Melhoria.NivelUpgrade.NIVEL3));
+    btnMelhoriaNivel1.addActionListener(e -> comprarMelhoria(Melhoria.NivelUpgrade.NIVEL1));
+    btnMelhoriaNivel2.addActionListener(e -> comprarMelhoria(Melhoria.NivelUpgrade.NIVEL2));
+    btnMelhoriaNivel3.addActionListener(e -> comprarMelhoria(Melhoria.NivelUpgrade.NIVEL3));
         
-        btnComprarMercadorias.addActionListener(e -> comprarMercadorias());
+    btnVenderMercadorias.addActionListener(e -> venderMercadorias());
         
-        btnVoltar.addActionListener(e -> voltarMenu());
+    btnVoltar.addActionListener(e -> voltarMenu());
     }
     
     private void comprarIntegrante(String tipo, double preco) {
@@ -243,17 +247,15 @@ public class LojaPanel extends JPanel {
         }
     }
     
-    private void comprarMercadorias() {
-        double preco = 20.0;
-        
-        if (favela.getSaldoDinheiro() >= preco) {
-            if (favela.gastarDinheiro(preco)) {
-                favela.adicionarMercadoria(10);
-                mostrarMensagem("Sucesso!", "10 mercadorias adicionadas ao estoque!");
-                atualizarInformacoes();
-            }
+    private void venderMercadorias() {
+        int quantidade = favela.getMercadoriaTotal();
+        if (quantidade > 0) {
+            double valorRecebido = quantidade * favela.getTaxaVendaMercadoria();
+            favela.venderMercadoria(quantidade);
+            mostrarMensagem("Sucesso!", quantidade + " mercadorias vendidas por R$ " + String.format("%.2f", valorRecebido));
+            atualizarInformacoes();
         } else {
-            mostrarMensagem("Erro!", "Saldo insuficiente para comprar mercadorias!");
+            mostrarMensagem("Erro!", "Você não possui mercadorias para vender!");
         }
     }
     
@@ -265,8 +267,8 @@ public class LojaPanel extends JPanel {
     }
     
     private void atualizarInformacoes() {
-        labelSaldo.setText("💰 Saldo: R$ " + String.format("%.2f", favela.getSaldoDinheiro()));
-        labelMercadorias.setText("📦 Mercadorias: " + favela.getMercadoriaTotal());
+        labelSaldo.setText(" Saldo: R$ " + String.format("%.2f", favela.getSaldoDinheiro()));
+        labelMercadorias.setText(" Mercadorias: " + favela.getMercadoriaTotal());
         
         // Atualizar disponibilidade dos botões baseada no saldo
         atualizarDisponibilidadeBotoes();
@@ -283,7 +285,7 @@ public class LojaPanel extends JPanel {
         btnMelhoriaNivel2.setEnabled(saldo >= Melhoria.NivelUpgrade.NIVEL2.getMelhoriaPreco());
         btnMelhoriaNivel3.setEnabled(saldo >= Melhoria.NivelUpgrade.NIVEL3.getMelhoriaPreco());
         
-        btnComprarMercadorias.setEnabled(saldo >= 20.0);
+        btnVenderMercadorias.setEnabled(favela.getMercadoriaTotal() > 0);
     }
     
     private void mostrarMensagem(String titulo, String mensagem) {
