@@ -25,7 +25,7 @@ public class Favela {
         this.nomeJogador = nomeJogador;
         this.nomeFavela = nomeFavela;
         this.saldoDinheiro = 1000.0; //saldo inicial
-        this.mercadoriaTotal = 0; //mercadoria inicial
+        this.mercadoriaTotal = 100; //mercadoria inicial
     }
 
     //Metodos getters e setters

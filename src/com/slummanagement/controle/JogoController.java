@@ -1,3 +1,5 @@
+//Faz a ponte entre o Simulador.java e a Interface
+
 package com.slummanagement.controle;
 
 import com.slummanagement.modelo.Favela;
