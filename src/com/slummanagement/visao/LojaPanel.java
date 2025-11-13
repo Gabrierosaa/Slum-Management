@@ -21,6 +21,8 @@ public class LojaPanel extends JPanel {
     private JButton btnMelhoriaNivel1;
     private JButton btnMelhoriaNivel2;
     private JButton btnMelhoriaNivel3;
+
+    private DashboardPanel dashboardPanel;
     
     // Botão para vender mercadorias
     private JButton btnVenderMercadorias;
@@ -28,9 +30,10 @@ public class LojaPanel extends JPanel {
     // Botão voltar
     private JButton btnVoltar;
     
-    public LojaPanel(Favela favela, JFrame parentFrame) {
+    public LojaPanel(Favela favela, JFrame parentFrame, DashboardPanel dashboardPanel) {
         this.favela = favela;
         this.parentFrame = parentFrame;
+        this.dashboardPanel = dashboardPanel;
         initializeComponents();
         setupLayout();
         setupEventListeners();
@@ -58,15 +61,15 @@ public class LojaPanel extends JPanel {
         btnMelhoriaNivel3 = criarBotaoItem("Melhoria Nível 3", "Grande melhoria na favela", 
                 Melhoria.NivelUpgrade.NIVEL3.getMelhoriaPreco());
         
-    // Botão para vender mercadorias
-    btnVenderMercadorias = new JButton();
-    btnVenderMercadorias.setText("Vender Mercadorias");
-    btnVenderMercadorias.setFont(new Font("Arial", Font.BOLD, 14));
-    btnVenderMercadorias.setBackground(new Color(70, 130, 180));
-    btnVenderMercadorias.setForeground(Color.WHITE);
-    btnVenderMercadorias.setBorderPainted(false);
-    btnVenderMercadorias.setFocusPainted(false);
-    btnVenderMercadorias.setPreferredSize(new Dimension(250, 80));
+        // Botão para vender mercadorias
+        btnVenderMercadorias = new JButton();
+        btnVenderMercadorias.setText("Vender Mercadorias");
+        btnVenderMercadorias.setFont(new Font("Arial", Font.BOLD, 14));
+        btnVenderMercadorias.setBackground(new Color(70, 130, 180));
+        btnVenderMercadorias.setForeground(Color.WHITE);
+        btnVenderMercadorias.setBorderPainted(false);
+        btnVenderMercadorias.setFocusPainted(false);
+        btnVenderMercadorias.setPreferredSize(new Dimension(250, 80));
         
         // Botão voltar
         btnVoltar = new JButton("← Voltar");
@@ -260,9 +263,10 @@ public class LojaPanel extends JPanel {
     }
     
     private void voltarMenu() {
-        // Aqui você poderia implementar a lógica para voltar ao menu principal
-        if (parentFrame != null) {
-            parentFrame.dispose();
+        if (parentFrame != null && dashboardPanel != null) {
+            parentFrame.setContentPane(dashboardPanel);
+            parentFrame.revalidate();
+            parentFrame.repaint();
         }
     }
     
