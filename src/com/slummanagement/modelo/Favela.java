@@ -10,15 +10,18 @@ public class Favela {
     private double saldoDinheiro;
     private int mercadoriaTotal;
 
+    // 🔥 Novo atributo de nível
+    private int nivel;
+
     //entidades da favela
     private final List<Integrante> integrantes = new ArrayList<>(); 
 
-// O método que resolve o erro de 'adicionarIntegrante is undefined'
+    // Método para adicionar integrante
     public void adicionarIntegrante(Integrante novoIntegrante) { 
         if (novoIntegrante != null) {
-        this.integrantes.add(novoIntegrante);  
+            this.integrantes.add(novoIntegrante);  
+        }
     }
-}
 
     //Construtor
     public Favela(String nomeJogador, String nomeFavela) {
@@ -26,76 +29,75 @@ public class Favela {
         this.nomeFavela = nomeFavela;
         this.saldoDinheiro = 1000.0; //saldo inicial
         this.mercadoriaTotal = 100; //mercadoria inicial
+        this.nivel = 0; // 🔥 nível inicial
     }
 
     //Metodos getters e setters
-    
-    public String getNomeFavela() { //mostra o nome da favela
+    public String getNomeFavela() {
         return nomeFavela;
     }
     
-    public String getNomeJogador() { //mostra o nome do jogador
+    public String getNomeJogador() {
         return nomeJogador;
     }
 
-    public double getSaldoDinheiro() { //mostra o saldo de dinheiro
+    public double getSaldoDinheiro() {
         return saldoDinheiro;
     }
 
-    public int getMercadoriaTotal() { //mostra a mercadoria total
+    public int getMercadoriaTotal() {
         return mercadoriaTotal;
     }
-    public List<Integrante> getIntegrantes() { //mostra os integrantes da favela   
+
+    public List<Integrante> getIntegrantes() {
         return integrantes; 
     }
 
-    //============METODOS DE NEGOCIO============//
+    public int getNivel() {
+        return nivel;
+    }
 
-    // Método para adicionar mercadoria
+    public void subirNivel(int quantidade) {
+        if (quantidade > 0) {
+            this.nivel += quantidade;
+        }
+    }
+
+    //============METODOS DE NEGOCIO============//
     public void adicionarMercadoria(int quantidade) {
         if (quantidade > 0) {
             this.mercadoriaTotal += quantidade;         
         }
     }
 
-    // Método para vender mercadoria
     public boolean venderMercadoria(int quantidade) {
-        final double TAXA_VENDA = 1.5; // valor de mercadoria
-        
+        final double TAXA_VENDA = 1.5;
+
         if (quantidade <= 0 || quantidade > this.mercadoriaTotal) {
-            return false; //não pode vender quantidade inválida
+            return false;
         }
 
-        // 1. Calcula o dinheiro a ser recebido
         double valorRecebido = quantidade * TAXA_VENDA;
 
-        // 2. Atualiza os saldos
         this.mercadoriaTotal -= quantidade;
         this.saldoDinheiro += valorRecebido;
      
         return true;
     }
 
-    // Método para aplicar bônus de venda (usado pelos Vendedores)
     public void aplicarBonusVenda(double bonus) {
-        // Pode ser implementado de diferentes formas, por exemplo:
-        // - Aumentar temporariamente a taxa de venda
-        // - Adicionar dinheiro diretamente baseado no bônus
         this.saldoDinheiro += bonus;
     }
 
-    // Método para gastar dinheiro (usado para compras e upgrades)
     public boolean gastarDinheiro(double valor) {
         if (valor <= 0 || valor > this.saldoDinheiro) {
-            return false; // Não pode gastar valor inválido ou maior que o saldo
+            return false;
         }
         this.saldoDinheiro -= valor;
         return true;
     }
 
-    // Método para obter a taxa de venda atual de mercadoria
     public double getTaxaVendaMercadoria() {
-        return 1.5; // Taxa fixa de venda
+        return 1.5;
     }
 }
-

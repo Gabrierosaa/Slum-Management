@@ -224,6 +224,8 @@ public class LojaPanel extends JPanel {
                         novoIntegrante = new Seguranca("Segurança #" + (favela.getIntegrantes().size() + 1));
                         break;
                 }
+
+                dashboardPanel.atualizarDashboard(favela);
                 
                 if (novoIntegrante != null) {
                     favela.adicionarIntegrante(novoIntegrante);
@@ -237,18 +239,29 @@ public class LojaPanel extends JPanel {
     }
     
     private void comprarMelhoria(Melhoria.NivelUpgrade nivelUpgrade) {
-        double preco = nivelUpgrade.getMelhoriaPreco();
-        
-        if (favela.getSaldoDinheiro() >= preco) {
-            if (favela.gastarDinheiro(preco)) {
-                // Aqui você poderia aplicar os efeitos da melhoria na favela
-                mostrarMensagem("Sucesso!", "Melhoria Nível " + nivelUpgrade.getNivel() + " adquirida!");
-                atualizarInformacoes();
-            }
-        } else {
-            mostrarMensagem("Erro!", "Saldo insuficiente para esta melhoria!");
+    double preco = nivelUpgrade.getMelhoriaPreco();
+
+    if (favela.getSaldoDinheiro() >= preco) {
+        if (favela.gastarDinheiro(preco)) {
+
+            // AUMENTA O NÍVEL DA FAVELA
+            favela.subirNivel(nivelUpgrade.getNivel());
+
+            mostrarMensagem(
+                "Sucesso!",
+                "Melhoria Nível " + nivelUpgrade.getNivel() + " adquirida!"
+            );
+
+            // Atualiza a tela da loja
+            atualizarInformacoes();
+
+
+            dashboardPanel.atualizarDashboard(favela);
         }
+    } else {
+        mostrarMensagem("Erro!", "Saldo insuficiente para esta melhoria!");
     }
+}
     
     private void venderMercadorias() {
         int quantidade = favela.getMercadoriaTotal();
@@ -256,6 +269,7 @@ public class LojaPanel extends JPanel {
             double valorRecebido = quantidade * favela.getTaxaVendaMercadoria();
             favela.venderMercadoria(quantidade);
             mostrarMensagem("Sucesso!", quantidade + " mercadorias vendidas por R$ " + String.format("%.2f", valorRecebido));
+            dashboardPanel.atualizarDashboard(favela);
             atualizarInformacoes();
         } else {
             mostrarMensagem("Erro!", "Você não possui mercadorias para vender!");

@@ -41,6 +41,10 @@ public class JogoController {
 
                 dashboardPanel.getLabelNomeJogador().setText("Nome: " + nomeJogador);
                 dashboardPanel.getLabelNomeFavela().setText("Nome da Favela: " + nomeFavela);
+                dashboardPanel.getLabelDinheiro().setText("Dineiro: $" + String.format("%.2f", favela.getSaldoDinheiro()));
+                dashboardPanel.getLabelMercadoriaTotal().setText("Mercadoria total: " + favela.getMercadoriaTotal());
+                dashboardPanel.getLabelIntegrantes().setText("Integrantes: " + favela.getIntegrantes().size());
+                dashboardPanel.getLabelNivel().setText("Nível: " + favela.getNivel());
 
 
                 frame.setContentPane(dashboardPanel);
