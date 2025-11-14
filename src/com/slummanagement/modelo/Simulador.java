@@ -2,13 +2,11 @@ package com.slummanagement.modelo;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.Timer;
 import java.util.Random;
+import javax.swing.Timer;
 
 
 public class Simulador {
-    private String nomeJogador;
-    private String nomeFavela;
     private Favela favela;
     private Timer timer;
     private Random random = new Random();
@@ -16,13 +14,8 @@ public class Simulador {
 
     
     public void iniciarJogo(Favela favela) {
-        this.nomeJogador = favela.getNomeJogador();
-        this.nomeFavela = favela.getNomeFavela();
         this.random = random;
         System.out.println("Jogo iniciado!");
-    }
-    public String getMensagemBoasVindas() {
-        return "Bem-vindo, " + nomeJogador + " da favela " + nomeFavela + "!";
     }
 
     public void iniciarLoopTempo() {

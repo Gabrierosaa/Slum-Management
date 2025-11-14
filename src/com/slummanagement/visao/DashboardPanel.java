@@ -1,5 +1,6 @@
 package com.slummanagement.visao;
 
+import com.slummanagement.modelo.Favela;
 import java.awt.*;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -196,6 +197,13 @@ public class DashboardPanel extends JPanel {
         ));
         panel.setPreferredSize(new Dimension(280, 260));
         return panel;
+    }
+
+    public void atualizarDashboard(Favela favela) {
+        labelDinheiro.setText("Dinheiro: R$ " + String.format("%.2f", favela.getSaldoDinheiro()));
+        labelMercadoriaTotal.setText("Mercadoria total: " + favela.getMercadoriaTotal());
+        labelIntegrantes.setText("Integrantes: " + favela.getIntegrantes().size());
+        labelNivel.setText("Nível: " + favela.getNivel());
     }
 
     public JLabel getLabelNomeJogador() { return labelNomeJogador; }
