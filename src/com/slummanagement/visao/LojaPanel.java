@@ -45,7 +45,7 @@ public class LojaPanel extends JPanel {
         labelSaldo = new JLabel();
         labelMercadorias = new JLabel();
         
-        // Botões de integrantes
+        // Botões de integrantefs
         btnComprarFabricante = criarBotaoItem("Contratar Fabricante", "Produz mercadorias automaticamente", 100.0);
         btnComprarVendedor = criarBotaoItem("Contratar Vendedor", "Aumenta lucro das vendas", 150.0);
         btnComprarSeguranca = criarBotaoItem("Contratar Segurança", "Protege a favela de ataques", 200.0);
