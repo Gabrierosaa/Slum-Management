@@ -5,6 +5,7 @@ public class Fabricante extends Integrante {
     // Atributos específicos do fabricante
     private int mercadoriasPorCiclo;
     private int tempoCicloSegundos;
+    private int tempoDecorridoSegundos; // Tempo acumulado desde a última produção
     
 
     public Fabricante(String nome) {
@@ -12,6 +13,7 @@ public class Fabricante extends Integrante {
         // Valores iniciais (Nível 1)
         this.mercadoriasPorCiclo = 2;
         this.tempoCicloSegundos = 4;
+        this.tempoDecorridoSegundos = 0; // Inicia o contador de tempo
     }
     
     // NOVO: Sobrescreve o método upgradeNivel para ajustar os atributos específicos
@@ -33,8 +35,18 @@ public class Fabricante extends Integrante {
     // Implementação do efeito único: Adicionar mercadoria à Favela
     @Override
     public void aplicarEfeito(Favela favela) {
-        // Esta lógica será chamada pelo Simulador a cada X segundos
-        favela.adicionarMercadoria(this.mercadoriasPorCiclo);
+        // Incrementa o tempo decorrido (chamado a cada segundo pelo Simulador)
+        tempoDecorridoSegundos++;
+        
+        // Verifica se completou um ciclo de produção
+        if (tempoDecorridoSegundos >= tempoCicloSegundos) {
+            // Produz mercadoria
+            favela.adicionarMercadoria(this.mercadoriasPorCiclo);
+            System.out.println("[FABRICANTE " + nome + "] Produziu " + mercadoriasPorCiclo + " mercadorias!");
+            
+            // Reseta o contador
+            tempoDecorridoSegundos = 0;
+        }
     }
     
     @Override
@@ -57,8 +69,16 @@ public class Fabricante extends Integrante {
         return false;
     }
     
-    // ... Getters específicos para o Simulador usar (getMercadoriasPorCiclo, getTempoCicloSegundos) ...
+    // Getters específicos
     public int getTempoCicloSegundos() {
         return this.tempoCicloSegundos;
+    }
+    
+    public int getMercadoriasPorCiclo() {
+        return this.mercadoriasPorCiclo;
+    }
+    
+    public int getTempoDecorridoSegundos() {
+        return this.tempoDecorridoSegundos;
     }
 }
