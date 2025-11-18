@@ -17,11 +17,12 @@ public class TesteLojaPanel {
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         
+        
         // Criar o painel da loja
-        LojaPanel lojaPanel = new LojaPanel(favela, frame);
+        //LojaPanel lojaPanel = new LojaPanel(favela, frame);
         
         // Adicionar o painel à janela
-        frame.setContentPane(lojaPanel);
+        //frame.setContentPane(lojaPanel);
         
         // Mostrar a janela
         frame.setVisible(true);
