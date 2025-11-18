@@ -60,6 +60,15 @@ public class Favela {
     public void subirNivel(int quantidade) {
         if (quantidade > 0) {
             this.nivel += quantidade;
+            // Sincroniza o nível dos funcionários
+            for (Integrante integrante : integrantes) {
+                if (integrante instanceof Fabricante || integrante instanceof Vendedor) {
+                    // Sobe o nível do integrante até igualar ao da favela
+                    while (integrante.nivel < this.nivel) {
+                        integrante.upgradeNivel();
+                    }
+                }
+            }
         }
     }
 
