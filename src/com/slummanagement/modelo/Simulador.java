@@ -14,8 +14,12 @@ public class Simulador {
 
     
     public void iniciarJogo(Favela favela) {
-        this.random = random;
+        this.favela = favela;
+        this.random = new Random();
         System.out.println("Jogo iniciado!");
+        
+        // Inicia o loop de tempo automaticamente
+        iniciarLoopTempo();
     }
 
     public void iniciarLoopTempo() {
