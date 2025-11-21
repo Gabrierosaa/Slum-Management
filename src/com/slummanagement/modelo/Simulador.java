@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 import javax.swing.Timer;
+import com.slummanagement.visao.DashboardPanel;
 
 
 public class Simulador {
@@ -11,6 +12,7 @@ public class Simulador {
     private Timer timer;
     private Random random = new Random();
     private final int INTERVALO_TICK_MS = 1000; 
+    private DashboardPanel dashboardPanel; // Referência ao painel para exibir mensagens
 
     
     public void iniciarJogo(Favela favela) {
@@ -20,6 +22,10 @@ public class Simulador {
         
         // Inicia o loop de tempo automaticamente
         iniciarLoopTempo();
+    }
+    
+    public void setDashboardPanel(DashboardPanel dashboardPanel) {
+        this.dashboardPanel = dashboardPanel;
     }
 
     public void iniciarLoopTempo() {
@@ -104,9 +110,12 @@ public class Simulador {
         double perda = favela.getSaldoDinheiro() * 0.15; // Perde 15% do saldo atual
         favela.gastarDinheiro(perda);
         
-        System.out.println("[ALERTA DO SIMULADOR] Invasão! Perdeu R$" + String.format("%.2f", perda));
+        String mensagem = "[INVASÃO] Sua favela foi invadida! Perdeu R$" + String.format("%.2f", perda);
+        System.out.println(mensagem);
         
-        // Futuramente: O JogoController será notificado para exibir o EventoPanel
-
+        // Adiciona mensagem no painel se disponível
+        if (dashboardPanel != null) {
+            dashboardPanel.adicionarMensagem(mensagem);
+        }
     }
 }

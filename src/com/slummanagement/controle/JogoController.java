@@ -37,14 +37,16 @@ public class JogoController {
 
                 Favela favela = new Favela(nomeJogador, nomeFavela);
                 simulador.iniciarJogo(favela);
+                
+                // Conecta o simulador ao dashboard para exibir mensagens
+                simulador.setDashboardPanel(dashboardPanel);
 
 
                 dashboardPanel.getLabelNomeJogador().setText("Nome: " + nomeJogador);
                 dashboardPanel.getLabelNomeFavela().setText("Nome da Favela: " + nomeFavela);
-                dashboardPanel.getLabelDinheiro().setText("Dineiro: $" + String.format("%.2f", favela.getSaldoDinheiro()));
-                dashboardPanel.getLabelMercadoriaTotal().setText("Mercadoria total: " + favela.getMercadoriaTotal());
-                dashboardPanel.getLabelIntegrantes().setText("Integrantes: " + favela.getIntegrantes().size());
-                dashboardPanel.getLabelNivel().setText("Nível: " + favela.getNivel());
+                
+                // Atualiza todas as informações do dashboard
+                dashboardPanel.atualizarDashboard(favela);
 
 
                 frame.setContentPane(dashboardPanel);
