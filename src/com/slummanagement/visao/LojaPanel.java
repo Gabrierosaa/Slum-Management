@@ -12,15 +12,30 @@ public class LojaPanel extends JPanel {
     private JLabel labelMercadorias;
     private JFrame parentFrame;
     
-    // Botões para integrantes
-    private JButton btnComprarFabricante;
-    private JButton btnComprarVendedor;
-    private JButton btnComprarSeguranca;
+    // Botões para integrantes - Fabricante
+    private JButton btnComprarFabricanteN1;
+    private JButton btnComprarFabricanteN2;
+    private JButton btnComprarFabricanteN3;
+    
+    // Botões para integrantes - Vendedor
+    private JButton btnComprarVendedorN1;
+    private JButton btnComprarVendedorN2;
+    private JButton btnComprarVendedorN3;
+    
+    // Botões para integrantes - Segurança
+    private JButton btnComprarSegurancaN1;
+    private JButton btnComprarSegurancaN2;
+    private JButton btnComprarSegurancaN3;
     
     // Botões para melhorias
     private JButton btnMelhoriaNivel1;
     private JButton btnMelhoriaNivel2;
     private JButton btnMelhoriaNivel3;
+    
+    // Botões para influencers
+    private JButton btnInfluencerPequeno;
+    private JButton btnInfluencerMedio;
+    private JButton btnInfluencerGrande;
 
     private DashboardPanel dashboardPanel;
     
@@ -48,10 +63,20 @@ public class LojaPanel extends JPanel {
         labelSaldo = new JLabel();
         labelMercadorias = new JLabel();
         
-        // Botões de integrantefs
-        btnComprarFabricante = criarBotaoItem("Contratar Fabricante", "Produz mercadorias automaticamente", 100.0);
-        btnComprarVendedor = criarBotaoItem("Contratar Vendedor", "Aumenta lucro das vendas", 150.0);
-        btnComprarSeguranca = criarBotaoItem("Contratar Segurança", "Protege a favela de ataques", 200.0);
+        // Botões de integrantes - Fabricante
+        btnComprarFabricanteN1 = criarBotaoItem("Fabricante Nível 1", "Produz 2 mercadorias/4s", 100.0);
+        btnComprarFabricanteN2 = criarBotaoItem("Fabricante Nível 2", "Produz 10 mercadorias/8s", 250.0);
+        btnComprarFabricanteN3 = criarBotaoItem("Fabricante Nível 3", "Produz 30 mercadorias/10s", 600.0);
+        
+        // Botões de integrantes - Vendedor
+        btnComprarVendedorN1 = criarBotaoItem("Vendedor Nível 1", "Bônus de venda: +1.5", 150.0);
+        btnComprarVendedorN2 = criarBotaoItem("Vendedor Nível 2", "Bônus de venda: +3.0", 300.0);
+        btnComprarVendedorN3 = criarBotaoItem("Vendedor Nível 3", "Bônus de venda: +5.0", 650.0);
+        
+        // Botões de integrantes - Segurança
+        btnComprarSegurancaN1 = criarBotaoItem("Segurança Nível 1", "Reduz risco em 10%", 200.0);
+        btnComprarSegurancaN2 = criarBotaoItem("Segurança Nível 2", "Reduz risco em 20%", 350.0);
+        btnComprarSegurancaN3 = criarBotaoItem("Segurança Nível 3", "Reduz risco em 35%", 700.0);
         
         // Botões de melhorias
         btnMelhoriaNivel1 = criarBotaoItem("Melhoria Nível 1", "Pequena melhoria na favela", 
@@ -60,6 +85,11 @@ public class LojaPanel extends JPanel {
                 Melhoria.NivelUpgrade.NIVEL2.getMelhoriaPreco());
         btnMelhoriaNivel3 = criarBotaoItem("Melhoria Nível 3", "Grande melhoria na favela", 
                 Melhoria.NivelUpgrade.NIVEL3.getMelhoriaPreco());
+        
+        // Botões de influencers
+        btnInfluencerPequeno = criarBotaoItem("Influencer Pequeno", "Bônus de venda: +R$ 50", 300.0);
+        btnInfluencerMedio = criarBotaoItem("Influencer Médio", "Bônus de venda: +R$ 150", 800.0);
+        btnInfluencerGrande = criarBotaoItem("Influencer Grande", "Bônus de venda: +R$ 350", 1500.0);
         
         // Botão para vender mercadorias
         btnVenderMercadorias = new JButton();
@@ -138,21 +168,43 @@ public class LojaPanel extends JPanel {
         painelInfo.add(Box.createHorizontalStrut(30));
         painelInfo.add(labelMercadorias);
         
-    // Painel central com seções lado a lado
-    JPanel painelCentral = new JPanel(new GridLayout(1, 2, 20, 0));
+    // Painel central com seções - 3 linhas x 2 colunas (mais 1 linha extra para melhorias)
+    JPanel painelCentral = new JPanel(new BorderLayout(10, 10));
     painelCentral.setBackground(new Color(45, 45, 45));
     painelCentral.setBorder(new EmptyBorder(20, 20, 0, 20));
+    
+    // Painel superior com grade 2x2 para funcionários
+    JPanel painelFuncionarios = new JPanel(new GridLayout(2, 2, 10, 10));
+    painelFuncionarios.setBackground(new Color(45, 45, 45));
 
-    // Seção de integrantes
-    JPanel secaoIntegrantes = criarSecao("CONTRATAR INTEGRANTES", 
-        new JButton[]{btnComprarFabricante, btnComprarVendedor, btnComprarSeguranca});
+    // Seção de Fabricantes
+    JPanel secaoFabricantes = criarSecao("FABRICANTES", 
+        new JButton[]{btnComprarFabricanteN1, btnComprarFabricanteN2, btnComprarFabricanteN3});
 
-    // Seção de melhorias
-    JPanel secaoMelhorias = criarSecao("MELHORIAS", 
+    // Seção de Vendedores
+    JPanel secaoVendedores = criarSecao("VENDEDORES", 
+        new JButton[]{btnComprarVendedorN1, btnComprarVendedorN2, btnComprarVendedorN3});
+
+    // Seção de Seguranças
+    JPanel secaoSegurancas = criarSecao("SEGURANÇAS", 
+        new JButton[]{btnComprarSegurancaN1, btnComprarSegurancaN2, btnComprarSegurancaN3});
+    
+    // Seção de Influencers
+    JPanel secaoInfluencers = criarSecao("INFLUENCERS", 
+        new JButton[]{btnInfluencerPequeno, btnInfluencerMedio, btnInfluencerGrande});
+
+    painelFuncionarios.add(secaoFabricantes);
+    painelFuncionarios.add(secaoVendedores);
+    painelFuncionarios.add(secaoSegurancas);
+    painelFuncionarios.add(secaoInfluencers);
+    
+    // Painel inferior para melhorias (ocupa toda a largura)
+    JPanel painelMelhorias = criarSecao("MELHORIAS DA FAVELA", 
         new JButton[]{btnMelhoriaNivel1, btnMelhoriaNivel2, btnMelhoriaNivel3});
-
-    painelCentral.add(secaoIntegrantes);
-    painelCentral.add(secaoMelhorias);
+    painelMelhorias.setPreferredSize(new Dimension(0, 150));
+    
+    painelCentral.add(painelFuncionarios, BorderLayout.CENTER);
+    painelCentral.add(painelMelhorias, BorderLayout.SOUTH);
         
     // Painel inferior com botão de vender mercadorias centralizado e botão voltar à esquerda
     JPanel painelInferior = new JPanel(new BorderLayout());
@@ -195,9 +247,25 @@ public class LojaPanel extends JPanel {
     }
     
     private void setupEventListeners() {
-    btnComprarFabricante.addActionListener(e -> comprarIntegrante("Fabricante", 100.0));
-    btnComprarVendedor.addActionListener(e -> comprarIntegrante("Vendedor", 150.0));
-    btnComprarSeguranca.addActionListener(e -> comprarIntegrante("Seguranca", 200.0));
+    // Fabricantes
+    btnComprarFabricanteN1.addActionListener(e -> comprarIntegrante("Fabricante", 1, 100.0));
+    btnComprarFabricanteN2.addActionListener(e -> comprarIntegrante("Fabricante", 2, 250.0));
+    btnComprarFabricanteN3.addActionListener(e -> comprarIntegrante("Fabricante", 3, 600.0));
+    
+    // Vendedores
+    btnComprarVendedorN1.addActionListener(e -> comprarIntegrante("Vendedor", 1, 150.0));
+    btnComprarVendedorN2.addActionListener(e -> comprarIntegrante("Vendedor", 2, 300.0));
+    btnComprarVendedorN3.addActionListener(e -> comprarIntegrante("Vendedor", 3, 650.0));
+    
+    // Seguranças
+    btnComprarSegurancaN1.addActionListener(e -> comprarIntegrante("Seguranca", 1, 200.0));
+    btnComprarSegurancaN2.addActionListener(e -> comprarIntegrante("Seguranca", 2, 350.0));
+    btnComprarSegurancaN3.addActionListener(e -> comprarIntegrante("Seguranca", 3, 700.0));
+    
+    // Influencers
+    btnInfluencerPequeno.addActionListener(e -> contratarInfluencer("Pequeno", 50.0, 300.0));
+    btnInfluencerMedio.addActionListener(e -> contratarInfluencer("Médio", 150.0, 800.0));
+    btnInfluencerGrande.addActionListener(e -> contratarInfluencer("Grande", 350.0, 1500.0));
         
     btnMelhoriaNivel1.addActionListener(e -> comprarMelhoria(Melhoria.NivelUpgrade.NIVEL1));
     btnMelhoriaNivel2.addActionListener(e -> comprarMelhoria(Melhoria.NivelUpgrade.NIVEL2));
@@ -208,7 +276,7 @@ public class LojaPanel extends JPanel {
     btnVoltar.addActionListener(e -> voltarMenu());
     }
     
-    private void comprarIntegrante(String tipo, double preco) {
+    private void comprarIntegrante(String tipo, int nivel, double preco) {
         if (favela.getSaldoDinheiro() >= preco) {
             if (favela.gastarDinheiro(preco)) {
                 Integrante novoIntegrante = null;
@@ -225,16 +293,20 @@ public class LojaPanel extends JPanel {
                         break;
                 }
 
-                dashboardPanel.atualizarDashboard(favela);
-                
                 if (novoIntegrante != null) {
+                    // Fazer upgrade do integrante até o nível desejado
+                    for (int i = 1; i < nivel; i++) {
+                        novoIntegrante.upgradeNivel(favela);
+                    }
+                    
                     favela.adicionarIntegrante(novoIntegrante);
-                    mostrarMensagem("Sucesso!", tipo + " contratado com sucesso!");
+                    mostrarMensagem("Sucesso!", tipo + " Nível " + nivel + " contratado com sucesso!");
                     atualizarInformacoes();
+                    dashboardPanel.atualizarDashboard(favela);
                 }
             }
         } else {
-            mostrarMensagem("Erro!", "Saldo insuficiente para contratar " + tipo + "!");
+            mostrarMensagem("Erro!", "Saldo insuficiente para contratar " + tipo + " Nível " + nivel + "!");
         }
     }
     
@@ -263,12 +335,43 @@ public class LojaPanel extends JPanel {
     }
 }
     
+    private void contratarInfluencer(String tamanho, double bonusVenda, double custo) {
+        if (favela.getSaldoDinheiro() >= custo) {
+            if (favela.gastarDinheiro(custo)) {
+                Influencer novoInfluencer = new Influencer("Influencer " + tamanho, bonusVenda);
+                favela.adicionarInfluencer(novoInfluencer);
+                
+                mostrarMensagem("Sucesso!", 
+                    "Influencer " + tamanho + " contratado! Cada venda agora dará +R$ " + 
+                    String.format("%.2f", bonusVenda) + " de bônus!");
+                
+                atualizarInformacoes();
+                dashboardPanel.atualizarDashboard(favela);
+            }
+        } else {
+            mostrarMensagem("Erro!", "Saldo insuficiente para contratar Influencer " + tamanho + "!");
+        }
+    }
+    
     private void venderMercadorias() {
         int quantidade = favela.getMercadoriaTotal();
         if (quantidade > 0) {
-            double valorRecebido = quantidade * favela.getTaxaVendaMercadoria();
+            double valorBase = quantidade * favela.getTaxaVendaMercadoria();
+            double bonusInfluencers = favela.calcularBonusInfluencers();
+            double valorTotal = valorBase + bonusInfluencers;
+            
             favela.venderMercadoria(quantidade);
-            mostrarMensagem("Sucesso!", quantidade + " mercadorias vendidas por R$ " + String.format("%.2f", valorRecebido));
+            
+            String mensagem = quantidade + " mercadorias vendidas!\n" +
+                            "Valor base: R$ " + String.format("%.2f", valorBase);
+            
+            if (bonusInfluencers > 0) {
+                mensagem += "\nBônus de influencers: +R$ " + String.format("%.2f", bonusInfluencers);
+            }
+            
+            mensagem += "\nTotal recebido: R$ " + String.format("%.2f", valorTotal);
+            
+            mostrarMensagem("Sucesso!", mensagem);
             dashboardPanel.atualizarDashboard(favela);
             atualizarInformacoes();
         } else {
@@ -295,9 +398,25 @@ public class LojaPanel extends JPanel {
     private void atualizarDisponibilidadeBotoes() {
         double saldo = favela.getSaldoDinheiro();
         
-        btnComprarFabricante.setEnabled(saldo >= 100.0);
-        btnComprarVendedor.setEnabled(saldo >= 150.0);
-        btnComprarSeguranca.setEnabled(saldo >= 200.0);
+        // Fabricantes
+        btnComprarFabricanteN1.setEnabled(saldo >= 100.0);
+        btnComprarFabricanteN2.setEnabled(saldo >= 250.0);
+        btnComprarFabricanteN3.setEnabled(saldo >= 600.0);
+        
+        // Vendedores
+        btnComprarVendedorN1.setEnabled(saldo >= 150.0);
+        btnComprarVendedorN2.setEnabled(saldo >= 300.0);
+        btnComprarVendedorN3.setEnabled(saldo >= 650.0);
+        
+        // Seguranças
+        btnComprarSegurancaN1.setEnabled(saldo >= 200.0);
+        btnComprarSegurancaN2.setEnabled(saldo >= 350.0);
+        btnComprarSegurancaN3.setEnabled(saldo >= 700.0);
+        
+        // Influencers
+        btnInfluencerPequeno.setEnabled(saldo >= 300.0);
+        btnInfluencerMedio.setEnabled(saldo >= 800.0);
+        btnInfluencerGrande.setEnabled(saldo >= 1500.0);
         
         btnMelhoriaNivel1.setEnabled(saldo >= Melhoria.NivelUpgrade.NIVEL1.getMelhoriaPreco());
         btnMelhoriaNivel2.setEnabled(saldo >= Melhoria.NivelUpgrade.NIVEL2.getMelhoriaPreco());

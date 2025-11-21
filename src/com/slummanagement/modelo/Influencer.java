@@ -2,18 +2,18 @@ package com.slummanagement.modelo;
 
 public class Influencer {
     private final String nomeInfluencer;
-    private final double dinheiro;
+    private final double bonusVenda;
 
-    public Influencer(String nomeInfluencer, double dinheiro){
+    public Influencer(String nomeInfluencer, double bonusVenda){
         this.nomeInfluencer = nomeInfluencer;
-        this.dinheiro = dinheiro;
+        this.bonusVenda = bonusVenda;
     }
 
     public String getNomeInfluencer(){
         return nomeInfluencer;
     }
 
-    public double getDinheiro(){
-        return dinheiro;
+    public double getBonusVenda(){
+        return bonusVenda;
     }
 }

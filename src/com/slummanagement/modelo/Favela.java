@@ -15,11 +15,19 @@ public class Favela {
 
     //entidades da favela
     private final List<Integrante> integrantes = new ArrayList<>(); 
+    private final List<Influencer> influencers = new ArrayList<>();
 
     // Método para adicionar integrante
     public void adicionarIntegrante(Integrante novoIntegrante) { 
         if (novoIntegrante != null) {
             this.integrantes.add(novoIntegrante);  
+        }
+    }
+    
+    // Método para adicionar influencer
+    public void adicionarInfluencer(Influencer novoInfluencer) {
+        if (novoInfluencer != null) {
+            this.influencers.add(novoInfluencer);
         }
     }
 
@@ -51,6 +59,10 @@ public class Favela {
 
     public List<Integrante> getIntegrantes() {
         return integrantes; 
+    }
+    
+    public List<Influencer> getInfluencers() {
+        return influencers;
     }
 
     public int getNivel() {
@@ -86,12 +98,28 @@ public class Favela {
             return false;
         }
 
+        // Calcula valor base
         double valorRecebido = quantidade * TAXA_VENDA;
+        
+        // Aplica bônus dos influencers
+        double bonusInfluencers = calcularBonusInfluencers();
+        valorRecebido += bonusInfluencers;
 
         this.mercadoriaTotal -= quantidade;
         this.saldoDinheiro += valorRecebido;
      
         return true;
+    }
+    
+    /**
+     * Calcula o bônus total de vendas de todos os influencers
+     */
+    public double calcularBonusInfluencers() {
+        double bonusTotal = 0.0;
+        for (Influencer influencer : influencers) {
+            bonusTotal += influencer.getBonusVenda();
+        }
+        return bonusTotal;
     }
 
     public void aplicarBonusVenda(double bonus) {

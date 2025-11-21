@@ -1,6 +1,10 @@
 package com.slummanagement.visao;
 
 import com.slummanagement.modelo.Favela;
+import com.slummanagement.modelo.Integrante;
+import com.slummanagement.modelo.Fabricante;
+import com.slummanagement.modelo.Vendedor;
+import com.slummanagement.modelo.Seguranca;
 import java.awt.*;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -15,8 +19,10 @@ public class DashboardPanel extends JPanel {
     private JLabel labelNivel;
 
     private JLabel labelMercadoriaTotal;
-    private JLabel labelVendas;
-    private JLabel labelIntegrantes;
+    private JLabel labelFabricantes;
+    private JLabel labelVendedores;
+    private JLabel labelSegurancas;
+    private JLabel labelInfluencers;
 
     private JTextArea areaMensagens;
     private JButton botaoLoja;
@@ -91,24 +97,28 @@ public class DashboardPanel extends JPanel {
 
         // --- Painel ESQUERDA ---
         JPanel painelEsquerda = criarPainelInfo("Informações");
-        painelEsquerda.setLayout(new GridLayout(3, 1, 10, 10));
+        painelEsquerda.setLayout(new GridLayout(5, 1, 10, 10));
         painelEsquerda.setBorder(BorderFactory.createCompoundBorder(
             painelEsquerda.getBorder(),
             new EmptyBorder(20, 25, 20, 25)
         ));
 
         labelMercadoriaTotal = new JLabel("Mercadoria total:");
-        labelVendas = new JLabel("Vendas:");
-        labelIntegrantes = new JLabel("Integrantes:");
+        labelFabricantes = new JLabel("Fabricantes:");
+        labelVendedores = new JLabel("Vendedores:");
+        labelSegurancas = new JLabel("Seguranças:");
+        labelInfluencers = new JLabel("Influencers:");
 
-        for (JLabel lbl : new JLabel[]{labelMercadoriaTotal, labelVendas, labelIntegrantes}) {
+        for (JLabel lbl : new JLabel[]{labelMercadoriaTotal, labelFabricantes, labelVendedores, labelSegurancas, labelInfluencers}) {
             lbl.setForeground(Color.WHITE);
             lbl.setFont(fontePadrao);
         }
 
         painelEsquerda.add(labelMercadoriaTotal);
-        painelEsquerda.add(labelVendas);
-        painelEsquerda.add(labelIntegrantes);
+        painelEsquerda.add(labelFabricantes);
+        painelEsquerda.add(labelVendedores);
+        painelEsquerda.add(labelSegurancas);
+        painelEsquerda.add(labelInfluencers);
 
         gpc.gridx = 0;
         gpc.insets = new Insets(0, 0, 0, 30);
@@ -138,7 +148,7 @@ public class DashboardPanel extends JPanel {
         painelPrincipal.add(painelCentro, gpc);
 
         // --- Painel DIREITA (Mensagens) ---
-        JPanel painelDireita = criarPainelInfo("Mensagens");
+        JPanel painelDireita = criarPainelInfo("Logs de Eventos");
         painelDireita.setLayout(new BorderLayout(10, 10));
         painelDireita.setBorder(BorderFactory.createCompoundBorder(
             painelDireita.getBorder(),
@@ -146,7 +156,7 @@ public class DashboardPanel extends JPanel {
         ));
 
         areaMensagens = new JTextArea();
-        areaMensagens.setFont(fontePadrao);
+        areaMensagens.setFont(new Font("Consolas", Font.PLAIN, 12));
         areaMensagens.setEditable(false);
         areaMensagens.setBackground(new Color(255, 255, 255, 20));
         areaMensagens.setForeground(Color.WHITE);
@@ -202,8 +212,27 @@ public class DashboardPanel extends JPanel {
     public void atualizarDashboard(Favela favela) {
         labelDinheiro.setText("Dinheiro: R$ " + String.format("%.2f", favela.getSaldoDinheiro()));
         labelMercadoriaTotal.setText("Mercadoria total: " + favela.getMercadoriaTotal());
-        labelIntegrantes.setText("Integrantes: " + favela.getIntegrantes().size());
         labelNivel.setText("Nível: " + favela.getNivel());
+        
+        // Contar cada tipo de integrante
+        int numFabricantes = 0;
+        int numVendedores = 0;
+        int numSegurancas = 0;
+        
+        for (Integrante integrante : favela.getIntegrantes()) {
+            if (integrante instanceof Fabricante) {
+                numFabricantes++;
+            } else if (integrante instanceof Vendedor) {
+                numVendedores++;
+            } else if (integrante instanceof Seguranca) {
+                numSegurancas++;
+            }
+        }
+        
+        labelFabricantes.setText("Fabricantes: " + numFabricantes);
+        labelVendedores.setText("Vendedores: " + numVendedores);
+        labelSegurancas.setText("Seguranças: " + numSegurancas);
+        labelInfluencers.setText("Influencers: " + favela.getInfluencers().size());
     }
 
     public JLabel getLabelNomeJogador() { return labelNomeJogador; }
@@ -212,10 +241,29 @@ public class DashboardPanel extends JPanel {
     public JLabel getLabelNivel() { return labelNivel; }
 
     public JLabel getLabelMercadoriaTotal() { return labelMercadoriaTotal; }
-    public JLabel getLabelVendas() { return labelVendas; }
-    public JLabel getLabelIntegrantes() { return labelIntegrantes; }
+    public JLabel getLabelFabricantes() { return labelFabricantes; }
+    public JLabel getLabelVendedores() { return labelVendedores; }
+    public JLabel getLabelSegurancas() { return labelSegurancas; }
+    public JLabel getLabelInfluencers() { return labelInfluencers; }
 
     public JTextArea getAreaMensagens() { return areaMensagens; }
     
     public JButton getBotaoLoja() { return botaoLoja; }
+    
+    /**
+     * Adiciona uma mensagem na área de mensagens com timestamp
+     */
+    public void adicionarMensagem(String mensagem) {
+        String textoAtual = areaMensagens.getText();
+        String novaLinha = textoAtual.isEmpty() ? "" : "\n";
+        
+        // Adiciona timestamp simples
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm:ss");
+        String timestamp = sdf.format(new java.util.Date());
+        
+        areaMensagens.append(novaLinha + "[" + timestamp + "] " + mensagem);
+        
+        // Auto-scroll para o final
+        areaMensagens.setCaretPosition(areaMensagens.getDocument().getLength());
+    }
 }
