@@ -7,11 +7,10 @@ public class Vendedor extends Integrante {
 
     public Vendedor(String nome) {
         super(nome);
-        // Valor inicial (Nível 1)
         this.bonusVenda = 1.5;
     }
 
-    // NOVO: Sobrescreve o upgradeNivel para ajustar o bônus
+    // Sobrescreve o upgradeNivel para ajustar o bônus
     @Override
     public boolean upgradeNivel() {
         if (super.upgradeNivel()) {
@@ -40,7 +39,6 @@ public class Vendedor extends Integrante {
 
     @Override
     public void aplicarEfeito(Favela favela) {
-        // Aplica o bônus de venda na favela
         favela.aplicarBonusVenda(this.bonusVenda);
     }
 
@@ -49,7 +47,6 @@ public class Vendedor extends Integrante {
         return this.nome;
     }
 
-    // Getters específicos, se precisar
     public double getBonusVenda() {
         return bonusVenda;
     }

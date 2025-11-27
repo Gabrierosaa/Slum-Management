@@ -147,6 +147,7 @@ public class LojaPanel extends JPanel {
     }
     
     private void setupLayout() {
+        
         // Painel superior com informações
         JPanel painelInfo = new JPanel(new FlowLayout(FlowLayout.LEFT));
         painelInfo.setBackground(new Color(35, 35, 35));
@@ -198,7 +199,7 @@ public class LojaPanel extends JPanel {
     painelFuncionarios.add(secaoSegurancas);
     painelFuncionarios.add(secaoInfluencers);
     
-    // Painel inferior para melhorias (ocupa toda a largura)
+    // Painel inferior para melhorias
     JPanel painelMelhorias = criarSecao("MELHORIAS DA FAVELA", 
         new JButton[]{btnMelhoriaNivel1, btnMelhoriaNivel2, btnMelhoriaNivel3});
     painelMelhorias.setPreferredSize(new Dimension(0, 150));
@@ -294,7 +295,6 @@ public class LojaPanel extends JPanel {
                 }
 
                 if (novoIntegrante != null) {
-                    // Fazer upgrade do integrante até o nível desejado
                     for (int i = 1; i < nivel; i++) {
                         novoIntegrante.upgradeNivel(favela);
                     }

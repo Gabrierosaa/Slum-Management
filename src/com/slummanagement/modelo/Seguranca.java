@@ -2,7 +2,7 @@ package com.slummanagement.modelo;
 
 public class Seguranca extends Integrante {
     
-    private double bonusReducaoRisco; // Exemplo: Porcentagem de redução de risco
+    private double bonusReducaoRisco;
 
     public Seguranca(String nome) {
         super(nome);
@@ -22,9 +22,9 @@ public class Seguranca extends Integrante {
     public boolean upgradeNivel(Favela favela) {
         if (super.upgradeNivel()) {
             if (nivel == 2) {
-                this.bonusReducaoRisco = 20.0; // 20% de redução
+                this.bonusReducaoRisco = 20.0;
             } else if (nivel == 3) {
-                this.bonusReducaoRisco = 35.0; // 35% de redução
+                this.bonusReducaoRisco = 35.0;
             }
             return true;
         }
@@ -36,7 +36,7 @@ public class Seguranca extends Integrante {
         return this.nome;
     }
     
-    // Getter para o bônus de redução de risco
+
     public double getBonusReducaoRisco() {
         return this.bonusReducaoRisco;
     }
