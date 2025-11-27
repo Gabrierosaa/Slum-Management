@@ -1,25 +1,22 @@
 package com.slummanagement.modelo;
 
 public class Fabricante extends Integrante {
-    
-    // Atributos específicos do fabricante
+
     private int mercadoriasPorCiclo;
     private int tempoCicloSegundos;
-    private int tempoDecorridoSegundos; // Tempo acumulado desde a última produção
+    private int tempoDecorridoSegundos;
     
 
     public Fabricante(String nome) {
-        super(nome); // Chama o construtor da classe base (Integrante)
-        // Valores iniciais (Nível 1)
+        super(nome);
         this.mercadoriasPorCiclo = 2;
         this.tempoCicloSegundos = 4;
-        this.tempoDecorridoSegundos = 0; // Inicia o contador de tempo
+        this.tempoDecorridoSegundos = 0;
     }
     
-    // NOVO: Sobrescreve o método upgradeNivel para ajustar os atributos específicos
     @Override
     public boolean upgradeNivel() {
-        if (super.upgradeNivel()) { // Tenta o upgrade na classe base
+        if (super.upgradeNivel()) {
             if (nivel == 2) {
                 this.mercadoriasPorCiclo = 10;
                 this.tempoCicloSegundos = 8;
@@ -32,19 +29,13 @@ public class Fabricante extends Integrante {
         return false;
     }
 
-    // Implementação do efeito único: Adicionar mercadoria à Favela
     @Override
     public void aplicarEfeito(Favela favela) {
-        // Incrementa o tempo decorrido (chamado a cada segundo pelo Simulador)
         tempoDecorridoSegundos++;
         
-        // Verifica se completou um ciclo de produção
         if (tempoDecorridoSegundos >= tempoCicloSegundos) {
-            // Produz mercadoria
             favela.adicionarMercadoria(this.mercadoriasPorCiclo);
             System.out.println("[FABRICANTE " + nome + "] Produziu " + mercadoriasPorCiclo + " mercadorias!");
-            
-            // Reseta o contador
             tempoDecorridoSegundos = 0;
         }
     }
@@ -56,7 +47,7 @@ public class Fabricante extends Integrante {
     
     @Override
     public boolean upgradeNivel(Favela favela) {
-        if (super.upgradeNivel()) { // Tenta o upgrade na classe base
+        if (super.upgradeNivel()) {
             if (nivel == 2) {
                 this.mercadoriasPorCiclo = 10;
                 this.tempoCicloSegundos = 8;
@@ -69,7 +60,6 @@ public class Fabricante extends Integrante {
         return false;
     }
     
-    // Getters específicos
     public int getTempoCicloSegundos() {
         return this.tempoCicloSegundos;
     }

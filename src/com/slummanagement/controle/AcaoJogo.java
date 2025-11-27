@@ -1,6 +1,4 @@
 package com.slummanagement.controle;
-
-// A interface precisa importar a classe Favela, pois o método executar modifica a Favela (o Modelo).
 import com.slummanagement.modelo.Favela; 
 
 /**

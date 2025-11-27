@@ -4,43 +4,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Favela {
-    //atributos da classe
     private final String nomeJogador;
     private final String nomeFavela;
     private double saldoDinheiro;
     private int mercadoriaTotal;
-
-    // 🔥 Novo atributo de nível
     private int nivel;
 
     //entidades da favela
     private final List<Integrante> integrantes = new ArrayList<>(); 
     private final List<Influencer> influencers = new ArrayList<>();
 
-    // Método para adicionar integrante
     public void adicionarIntegrante(Integrante novoIntegrante) { 
         if (novoIntegrante != null) {
             this.integrantes.add(novoIntegrante);  
         }
     }
     
-    // Método para adicionar influencer
     public void adicionarInfluencer(Influencer novoInfluencer) {
         if (novoInfluencer != null) {
             this.influencers.add(novoInfluencer);
         }
     }
 
-    //Construtor
     public Favela(String nomeJogador, String nomeFavela) {
         this.nomeJogador = nomeJogador;
         this.nomeFavela = nomeFavela;
-        this.saldoDinheiro = 1000.0; //saldo inicial
-        this.mercadoriaTotal = 100; //mercadoria inicial
-        this.nivel = 0; // 🔥 nível inicial
+        this.saldoDinheiro = 1000.0;
+        this.mercadoriaTotal = 100;
+        this.nivel = 0;
     }
 
-    //Metodos getters e setters
     public String getNomeFavela() {
         return nomeFavela;
     }
